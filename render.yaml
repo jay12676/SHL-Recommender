@@ -1,0 +1,18 @@
+# Render deployment (free tier). Connect the repo and Render reads this file.
+services:
+  - type: web
+    name: shl-recommender
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python -m scripts.build_catalog
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false           # set this in the Render dashboard (secret)
+      - key: GROQ_MODEL
+        value: llama-3.1-8b-instant
+      - key: USE_EMBEDDINGS
+        value: "false"
+      - key: PYTHON_VERSION
+        value: "3.12.6"

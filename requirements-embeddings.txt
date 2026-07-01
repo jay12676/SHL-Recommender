@@ -1,0 +1,4 @@
+# Optional: enable semantic retrieval (hybrid BM25 + embeddings).
+# Heavier (pulls in torch). Install only on a host with enough RAM, then set
+# USE_EMBEDDINGS=true. Retrieval degrades gracefully to BM25-only without these.
+sentence-transformers>=2.6
